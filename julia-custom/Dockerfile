@@ -5,37 +5,43 @@ LABEL maintainer="simon.mandlik@gmail.com"
 ARG VERSION=0.7.0-beta2
 ARG DEBIAN_FRONTEND=noninteractive
 
-# install dependencies, all in a separate command for better caching
-RUN apt-get -y clean
-RUN apt-get -y update
-RUN apt-get -y upgrade
-RUN apt-get -y dist-upgrade
-
-RUN apt-get -y install --no-install-recommends apt-utils
-RUN apt-get -y install --no-install-recommends automake make cmake
-RUN apt-get -y install --no-install-recommends build-essential
-RUN apt-get -y install --no-install-recommends bzip2
-RUN apt-get -y install --no-install-recommends ca-certificates
-RUN apt-get -y install --no-install-recommends curl wget
-RUN apt-get -y install --no-install-recommends gcc g++
-RUN apt-get -y install --no-install-recommends gfortran
-RUN apt-get -y install --no-install-recommends git
-RUN apt-get -y install --no-install-recommends hdf5-tools
-RUN apt-get -y install --no-install-recommends htop
-RUN apt-get -y install --no-install-recommends libatomic1
-RUN apt-get -y install --no-install-recommends libxml2
-RUN apt-get -y install --no-install-recommends m4
-RUN apt-get -y install --no-install-recommends perl
-RUN apt-get -y install --no-install-recommends pkg-config
-RUN apt-get -y install --no-install-recommends python python2.7-dev python3-dev
-RUN apt-get -y install --no-install-recommends s3fs
-RUN apt-get -y install --no-install-recommends tmux
-RUN apt-get -y install --no-install-recommends unzip
-RUN apt-get -y install --no-install-recommends zlib1g-dev
-
-RUN apt-get -y autoremove
-
-RUN rm -rf /var/lib/apt/lists/*
+# install dependencies
+RUN apt-get -y clean && apt-get -y update &&     \
+    apt-get -y install --no-install-recommends   \
+	apt-utils																		   \
+	automake																		   \
+	autotools-dev																   \
+	build-essential															   \
+	bzip2																				   \
+	ca-certificates															   \
+	cmake																				   \
+	curl																				   \
+	fuse																				   \
+	g++																					   \
+	gcc																					   \
+	gfortran																		   \
+	git																					   \
+	hdf5-tools																	   \
+	htop																				   \
+	libatomic1																	   \
+	libcurl4-openssl-dev												   \
+	libfuse-dev																	   \
+	libssl-dev																	   \
+	libxml2-dev 																   \
+	m4																					   \
+	make																				   \
+	perl																				   \
+	pkg-config																	   \
+	python																			   \
+	python2.7-dev																   \
+	python3-dev																	   \
+	s3fs																				   \
+	tmux																				   \
+	unzip																				   \
+	wget																				   \
+	zlib1g-dev																	   \
+&& apt-get -y autoremove												 \
+&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
 
@@ -55,3 +61,12 @@ WORKDIR /opt
 RUN curl "https://julialang-s3.julialang.org/bin/linux/x64/0.7/julia-$VERSION-linux-x86_64.tar.gz" -o julia.tar.gz
 RUN tar -xf julia.tar.gz && rm julia.tar.gz
 RUN ln -s /opt/julia-$VERSION/bin/julia /usr/local/bin/julia
+
+# build s3fs
+RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+WORKDIR s3fs-fuse
+RUN ./autogen.sh
+RUN ./configure
+RUN make && make install
+
+WORKDIR /root
