@@ -3,6 +3,7 @@ FROM ubuntu
 LABEL maintainer="simon.mandlik@gmail.com"
 
 ARG VERSION=0.7.0-beta2
+ARG S3_BUCKET=hobbiton-eu-west-1-nn
 ARG DEBIAN_FRONTEND=noninteractive
 
 # install dependencies
@@ -65,8 +66,6 @@ RUN ln -s /opt/julia-$VERSION/bin/julia /usr/local/bin/julia
 # build s3fs
 RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git
 WORKDIR s3fs-fuse
-RUN ./autogen.sh
-RUN ./configure
-RUN make && make install
+RUN ./autogen.sh && ./configure && make && make install
 
 WORKDIR /root

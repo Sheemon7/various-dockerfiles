@@ -1,4 +1,4 @@
-FROM simonmandlik/julia-custom
+FROM simonmandlik/julia-custom:latest
 
 LABEL maintainer="simon.mandlik@gmail.com"
 ARG t=""
@@ -22,3 +22,7 @@ ARG t=""
 # #ENTRYPOINT ["/bin/bash", "-c", "julia -L ../init.jl ${*}", "--"]
 #
 # # docker run -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+
+# mounted S3 location
+ENV S3=/s3
+RUN s3fs $S3_BUCKET $S3 -o use_cache=/tmp -o iam_role=NN-EC2-Worker -o umask=002 -o use_sse=kmsid:'KMSID'
