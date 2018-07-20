@@ -16,9 +16,6 @@ RUN mkdir /root/$REPO_NAME
 COPY $REPO_NAME/ /root/$REPO_NAME
 WORKDIR /root/$REPO_NAME
 
-# COPY juliarc.jl .juliarc.jl
-# COPY init.jl .
-
 # RUN julia --depwarn=no -e "Pkg.activate(\"/root\"); Pkg.instantiate()"
 
 # ENV JULIA_NUM_THREADS=t
