@@ -16,9 +16,9 @@ RUN mkdir /root/$REPO_NAME
 COPY $REPO_NAME/ /root/$REPO_NAME
 WORKDIR /root/$REPO_NAME
 
-# RUN julia --depwarn=no -e "Pkg.activate(\"/root\"); Pkg.instantiate()"
-
 # ENV JULIA_NUM_THREADS=t
 
-ENTRYPOINT s3fs $S3_BUCKET $S3 -o use_cache=/tmp -o iam_role=NN-EC2-Worker -o umask=002 -o use_sse=kmsid:'KMSID' \
-			&& tmux
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["tmux"]
