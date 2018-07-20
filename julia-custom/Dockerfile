@@ -3,7 +3,6 @@ FROM ubuntu
 LABEL maintainer="simon.mandlik@gmail.com"
 
 ARG VERSION=0.7.0-beta2
-ARG S3_BUCKET=hobbiton-eu-west-1-nn
 ARG DEBIAN_FRONTEND=noninteractive
 
 # install dependencies
