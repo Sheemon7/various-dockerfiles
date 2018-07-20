@@ -6,6 +6,7 @@ ARG REPO_NAME=Mini.jl
 ARG S3=/s3
 ARG S3_BUCKET=hobbiton-eu-west-1-nn
 ARG t=""
+ARG p=1
 
 # mounted S3 location
 ENV S3=$S3
@@ -16,9 +17,9 @@ RUN mkdir /root/$REPO_NAME
 COPY $REPO_NAME/ /root/$REPO_NAME
 WORKDIR /root/$REPO_NAME
 
-# ENV JULIA_NUM_THREADS=t
+ENV JULIA_NUM_THREADS=t
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["tmux"]
+CMD ["/bin/bash", "-c", "julia -p $p init.sh"]]
