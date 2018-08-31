@@ -2,7 +2,7 @@ FROM ubuntu
 
 LABEL maintainer="simon.mandlik@gmail.com"
 
-ARG VERSION=0.7.0-beta2
+ARG VERSION=0.6.4
 ARG DEBIAN_FRONTEND=noninteractive
 
 # install dependencies
@@ -58,7 +58,7 @@ WORKDIR /opt
 #     MANPATH="/opt/julia/usr/share/man:$MANPATH"
 
 # download compiled julia
-RUN curl "https://julialang-s3.julialang.org/bin/linux/x64/0.7/julia-$VERSION-linux-x86_64.tar.gz" -o julia.tar.gz
+RUN curl "https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-$VERSION-linux-x86_64.tar.gz" -o julia.tar.gz
 RUN tar -xf julia.tar.gz && rm julia.tar.gz
 RUN ln -s /opt/julia-$VERSION/bin/julia /usr/local/bin/julia
 
