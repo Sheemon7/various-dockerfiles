@@ -67,8 +67,8 @@ RUN tar -xf julia.tar.gz && rm julia.tar.gz
 RUN ln -s /opt/julia-9d11f62bcb/bin/julia /usr/local/bin/julia
 
 # build system image and install dependencies
-RUN julia -e 'include(joinpath(dirname(JULIA_HOME),"share","julia","build_sysimg.jl")); build_sysimg(force=true); \
-packages = ["Revise", "Flux", "BSON", "Adapt", "MLBase", "Hiccup", "PGFPlotsX", "Conda", "DataStructures", "Query", "MLDataPattern", "PyPlot", "Plots", "GraphPlot", "CSV", "DataFrames", "Gadfly", "Compose", "JLD", "JLD2", "Requests", "TranscodingStreams", "XMLDict", "Retry", "StatsBase", "LearnBase", "FileIO"]; \
+RUN julia -e 'include(joinpath(dirname(JULIA_HOME),"share","julia","build_sysimg.jl")); build_sysimg(force=true)'
+RUN julia -e 'packages = ["Revise", "Flux", "BSON", "Adapt", "MLBase", "Hiccup", "PGFPlotsX", "Conda", "DataStructures", "Query", "MLDataPattern", "PyPlot", "Plots", "GraphPlot", "CSV", "DataFrames", "Gadfly", "Compose", "JLD", "JLD2", "Requests", "TranscodingStreams", "XMLDict", "Retry", "StatsBase", "LearnBase", "FileIO"]; \
 Pkg.add.(packages); \
 Pkg.clone("https://github.com/pevnak/Mill.jl"); \
 Pkg.clone("https://github.com/pevnak/FluxExtensions.jl"); \
