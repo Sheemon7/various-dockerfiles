@@ -1,8 +1,7 @@
 #!/bin/bash
 
-sudo s3fs $S3_URL $S3 -o use_cache=/tmp -o -o umask=002 -o use_sse=kmsid:'KMSID'
+sudo s3fs $BUCKET $S3 -o use_cache=/tmp -o umask=002 -o use_sse=kmsid:'KMSID'
 
 export JULIA_NUM_THREADS=$(nproc --all)
 
-# julia -L set-paths.jl docker_main.jl
-exec "$@"
+julia -L set_paths.jl docker_main.jl "$(cat ${S3}/${BUCKET_PATH}/data_folder.txt)"

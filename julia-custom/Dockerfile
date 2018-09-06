@@ -8,42 +8,46 @@ ARG DEBIAN_FRONTEND=noninteractive
 # install dependencies
 RUN apt-get -y clean && apt-get -y update && \
     apt-get -y install --no-install-recommends \
-	apt-utils \
-	automake \
-	autotools-dev \
-	build-essential \
-	bzip2 \
-	ca-certificates \
-	cmake \
-	curl \
-	fuse \
-	g++ \
-	gcc \
-	gfortran \
-	git \
-	hdf5-tools \
-	htop \
-	libatomic1 \
-	libcurl4-openssl-dev \
-	libfuse-dev \
-	libssl-dev \
-	libxml2-dev \
-	m4 \
-	make \
+    apt-utils \
+    automake \
+    autotools-dev \
+    build-essential \
+    bzip2 \
+    ca-certificates \
+    cmake \
+    curl \
+    fuse \
+    g++ \
+    gcc \
+    gfortran \
+    git \
+    hdf5-tools \
+    htop \
+    libatomic1 \
+    libcurl4-openssl-dev \
+    libfuse-dev \
+    libssl-dev \
+    libxml2-dev \
+    m4 \
+    make \
     pdf2svg \
-	perl \
-	pkg-config \
+    perl \
+    pkg-config \
     poppler-utils \
-	python \
-	python2.7-dev \
-	python3-dev \
-	s3fs \
+    python \
+    python-matplotlib \
+    python-pip \
+    python2.7-dev \
+    python3-dev \
+    python3-matplotlib \
+    python3-pip \
+    s3fs \
     sudo \
     texlive-latex-base \
-	tmux \
-	unzip \
-	wget \
-	zlib1g-dev \
+    tmux \
+    unzip \
+    wget \
+    zlib1g-dev \
 && apt-get -y autoremove \
 && rm -rf /var/lib/apt/lists/*
 
@@ -68,7 +72,7 @@ RUN ln -s /opt/julia-9d11f62bcb/bin/julia /usr/local/bin/julia
 
 # build system image and install dependencies
 RUN julia -e 'include(joinpath(dirname(JULIA_HOME),"share","julia","build_sysimg.jl")); build_sysimg(force=true)'
-RUN julia -e 'packages = ["Revise", "Flux", "BSON", "Adapt", "MLBase", "Hiccup", "PGFPlotsX", "Conda", "DataStructures", "Query", "MLDataPattern", "PyPlot", "Plots", "GraphPlot", "CSV", "DataFrames", "Gadfly", "Compose", "JLD", "JLD2", "Requests", "TranscodingStreams", "XMLDict", "Retry", "StatsBase", "LearnBase", "FileIO"]; \
+RUN julia -e 'packages = ["Revise", "Flux", "BSON", "Adapt", "MLBase", "Hiccup", "PGFPlotsX", "Conda", "DataStructures", "Query", "MLDataPattern", "PyPlot", "Plots", "GraphPlot", "CSV", "DataFrames", "Gadfly", "Compose", "JLD2", "Requests", "TranscodingStreams", "XMLDict", "Retry", "StatsBase", "LearnBase", "FileIO"]; \
 Pkg.add.(packages); \
 Pkg.clone("https://github.com/pevnak/Mill.jl"); \
 Pkg.clone("https://github.com/pevnak/FluxExtensions.jl"); \
