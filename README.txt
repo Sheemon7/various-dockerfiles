@@ -6,6 +6,8 @@ sudo docker run --rm -it --privileged simonmandlik/mini:baseline $bucket_name $b
 
 kde $bucket_name je url s3 bucketu, na kterem jsou data, napr. hobbiton-eu-west-1-nn 
 a $bucket_prefix je prefix v ramci tohoto bucketu, napr. docker_test/
+K pristupu na docker jsou pouzity metadata ec2, tak je treba, aby dana instance byla ve spravne
+security group.
 
 Slozka s experimenty, ktera je na ceste $bucket_name/$bucket_prefix, musi obsahovat:
 
@@ -19,7 +21,7 @@ jednak samotny graf, na kterem bude probihat inference. Ten musi byt ve stejnem 
 
 Spravna konfigurace muze vypadat treba takto:
 
-.
+docker_test/
 ├── data_folder.txt
 ├── experiment1
 │   ├── graph
@@ -34,6 +36,7 @@ Spravna konfigurace muze vypadat treba takto:
     │   └── graph3.tsv.gz
     └── jira-cluster-definitions-sm.json
 
+Evaluace trva +- 12 hodin na tydennim grafu.
 Pote, co kontejner dokonci praci na napr. "experiment1", bude adresar vypadat takto:
 
 experiment1/
