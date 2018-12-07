@@ -18,6 +18,7 @@ a ne cele cesty k temto adresarum).
 
 2) V danem adresari, kde je treba vyhodnotit data, musi byt jednak ground truth (opet presny nazev "jira-cluster-definitions-sm.json"),
 jednak samotny graf, na kterem bude probihat inference. Ten musi byt ve stejnem formatu jako na s3, tedy nekolik zazipovanych textaku.
+Take tam musi byt adresar seeds/, ktery obsahuje jednotlive definice seedu, napr. seed-1.txt, seed-2.txt
 
 Spravna konfigurace muze vypadat treba takto:
 
@@ -28,13 +29,21 @@ docker_test/
 │   │   ├── graph1.tsv.gz
 │   │   ├── graph2.tsv.gz
 │   │   └── graph3.tsv.gz
-│   └── jira-cluster-definitions-sm.json
+│   ├── jira-cluster-definitions-sm.json
+│   └── seed
+│       ├── seed-1.txt
+│       ├── seed-2.txt
+│       └── seed-3.txt 
 └── experiment2
     ├── graph
     │   ├── graph1.tsv.gz
     │   ├── graph2.tsv.gz
     │   └── graph3.tsv.gz
-    └── jira-cluster-definitions-sm.json
+    ├── jira-cluster-definitions-sm.json
+    └── seed
+        ├── seed-1.txt
+        ├── seed-2.txt
+        └── seed-3.txt 
 
 Evaluace trva +- 12 hodin na tydennim grafu.
 Pote, co kontejner dokonci praci na napr. "experiment1", bude adresar vypadat takto:
