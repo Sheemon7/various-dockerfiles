@@ -43,7 +43,10 @@ RUN apt-get -y clean && apt-get -y update && \
 WORKDIR /opt
 
 # download compiled julia
-RUN curl "https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.1-linux-x86_64.tar.gz" -o julia.tar.gz
+# julia 1.0.1
+# RUN curl "https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.1-linux-x86_64.tar.gz" -o julia.tar.gz
+# julia 0.7
+RUN curl "https://julialang-s3.julialang.org/bin/linux/x64/0.7/julia-0.7.0-linux-x86_64.tar.gz" -o julia.tar.gz
 RUN tar -xf julia.tar.gz && rm julia.tar.gz
 RUN ln -s /opt/julia-1.0.1/bin/julia /usr/local/bin/julia
 

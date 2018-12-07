@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# e.g. sudo ./build.sh $M1 2018-09-26_all_4_1
 if [ "$#" -ne 2 ]; then
     echo "Please supply result folder as an argument"
     exit 1
@@ -18,4 +20,5 @@ cd ../mini
 sudo docker build ./ --tag simonmandlik/mini:baseline
 sudo docker push simonmandlik/mini:baseline
 
-# sudo docker run --rm --privileged simonmandlik/mini:latest
+# sudo docker run --rm --privileged simonmandlik/mini:latest hobbiton-eu-west-1-nn docker_test
+# or sudo docker run --rm -it --privileged --entrypoint=/bin/bash simonmandlik/mini:latest hobbiton-eu-west-1-nn docker_test
