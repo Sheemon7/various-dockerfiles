@@ -50,7 +50,7 @@ WORKDIR /opt
 # julia 0.7
 RUN curl "https://julialang-s3.julialang.org/bin/linux/x64/0.7/julia-0.7.0-linux-x86_64.tar.gz" -o julia.tar.gz
 RUN tar -xf julia.tar.gz && rm julia.tar.gz
-RUN ln -s /opt/julia-0.7/bin/julia /usr/local/bin/julia
+RUN ln -s /opt/julia-0.7.0/bin/julia /usr/local/bin/julia
 
 # build s3fs
 RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git
