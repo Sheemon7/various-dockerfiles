@@ -67,6 +67,10 @@ experiment1/
 │   ├── graph1.tsv.gz
 │   ├── graph2.tsv.gz
 │   └── graph3.tsv.gz
+├── seed
+│   ├── seed-1.txt
+│   ├── seed-2.txt
+│   └── seed-3.txt 
 └── jira-cluster-definitions-sm.json
 
 Pribyla nova slozka s datumem a hashi casu, ve ktere jsou vysledky dane evaluace (tak je mozne
