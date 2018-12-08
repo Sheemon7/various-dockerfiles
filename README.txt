@@ -4,6 +4,8 @@ Ja ho poustim napriklad takto:
 
 sudo docker run --rm -it --privileged simonmandlik/mini:baseline $bucket_name $bucket_prefix
 
+Existuji dva tagy - baseline a latest, kde baseline je jednodussi model, latest je trochu vypocetne narocnejsi model, ale mel by byt lepsi
+
 kde $bucket_name je url s3 bucketu, na kterem jsou data, napr. hobbiton-eu-west-1-nn 
 a $bucket_prefix je prefix v ramci tohoto bucketu, napr. docker_test/
 K pristupu na docker jsou pouzity metadata ec2, tak je treba, aby dana instance byla ve spravne
